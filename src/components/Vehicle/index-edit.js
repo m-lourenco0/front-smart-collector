@@ -2,7 +2,7 @@ import './index.scss';
 import { useForm } from 'react-hook-form';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {  useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const EditVehicle = () => {
     
@@ -19,12 +19,27 @@ const EditVehicle = () => {
 
     useEffect(() => {
         getVehicleData(id);
-    } , []);
+    }, [id]);
 
     const updateSubmit = async (data) => {
-        
-        console.log(vehicle)
-        // await axios.put(`http://10.0.0.2:81/vehicle/${data.id_Veiculo}`, data)
+        console.log(data.nome)
+        await axios.put(`http://10.0.0.2:81/vehicle/`, {
+            id: id,
+            nome: data.nome.length > 0  ? data.nome : vehicle.ds_Veiculo,
+            capacidade: data.capacidade.length > 0  ? data.capacidade : vehicle.vl_CapacidadeKG,
+            placa: data.placa.length > 0 ? data.placa : vehicle.cd_Placa,
+        })
+        .then((res) => {
+            const status = res.status;
+
+            if (status === 200) {
+                window.location.href = '/vehicle';
+            }
+        })
+        .catch(e => {
+            console.log(e);
+            alert('Erro ao atualizar veículo');
+        })
     }
 
     return (
@@ -40,17 +55,17 @@ const EditVehicle = () => {
                             <ul>
                                 <li className='half'>
                                     <label>Veículo</label>
-                                    <input onChange={(e) => console.log(e)} type='text' name='nome' placeholder='Veículo' {...register('nome')}/>
+                                    <input defaultValue={vehicle.ds_Veiculo} type='text' name='nome' placeholder='Veículo' {...register('nome')}/>
                                     {errors.capacidade && <span className='error'>* Nome do veículo é inválido</span>}
                                 </li>
                                 <li className='half'>
                                     <label>Capacidade (KG)</label>
-                                    <input type='number' name='capacidade' placeholder='Capacidade (KG)' {...register('capacidade')}/>
+                                    <input defaultValue={vehicle.vl_CapacidadeKG} type='number' name='capacidade' placeholder='Capacidade (KG)' {...register('capacidade')}/>
                                     {errors.capacidade && <span className='error'>* Valor de capacidade é inválido</span>}
                                 </li>
                                 <li className='half'>
                                     <label>Placa</label>
-                                    <input id='placa' placeholder='Placa' type='text' name='placa' {...register('placa')}/>
+                                    <input defaultValue={vehicle.cd_Placa} id='placa' placeholder='Placa' type='text' name='placa' {...register('placa')}/>
                                     {errors.placa && <span className='error'>* Valor da placa é inválido</span>}
                                 </li>
                             </ul>

@@ -102,6 +102,12 @@
             }
         }
 
+        a.service {
+            &::after {
+                content: 'SERVICES';
+            }
+        }
+
         a.active {
             svg {
                 color: #ffd700;
