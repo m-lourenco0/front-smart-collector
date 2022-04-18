@@ -1,0 +1,162 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    width: 680px;
+    background-color: #eeeeee;
+    border-radius: 5px;
+}
+
+.modal-header {
+    width: 97%;
+    display: inline-flex;
+    align-items: center;
+
+    span {
+        font-size: 25px;
+        margin-left: 15px;
+        padding: 10px;
+        float: right;
+    }
+
+    h2 {
+        width: 100%;
+        font-size: 20px;
+        font-weight: 300;
+        color: #000;
+        margin-left: 10px;
+        font-family: 'Nunito', sans-serif;
+    }
+}
+
+.modal-footer {
+    padding: 15px;
+    float: right;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+.modal-body {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    height: 110px;
+}
+
+.close {
+    font-size: 20px;
+}
+
+.flat-button {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    font-family: sans-serif;
+    text-decoration: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    margin: auto;
+    margin-left: 5px; 
+}
+
+.btn-cancel {
+    color: red;
+    border: 1px solid red;
+
+    &:hover {
+        background-color: red;
+        color: #333;
+    }
+}
+
+.btn-confirm {
+    color: #eeeeee;
+    background-color: green;
+    border: 1px solid green;
+
+    &:hover {
+        background-color: green;
+        color: #333;
+    }
+}
+
+ul {
+
+    li {
+        list-style: none;
+        margin-bottom: 10px;
+        overflow: hidden;
+        display: inline-block;
+        position: relative;
+        opacity: 0;
+        animation: fadeInUp 0s 0s;
+        animation-fill-mode: forwards;
+        clear: both;
+        justify-content: space-between;
+    }
+
+    
+
+    li.half {
+        width: 30%;
+        margin-left: 2%;
+        float: left;
+        clear: none;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        label {
+            color: #000;
+        }
+    }
+
+    .error {
+        font-size: 13px;
+        color: rgb(255, 0, 0);
+        margin-left: 5px;
+    }
+}
+
+input[type='text'],
+input[type='number'] {
+    width: 100%;
+    border: 0;
+    background: #115173;
+    height: 50px;
+    font-size: 16px;
+    color: #fff;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+textarea {
+    width: 100%;
+    border: 0;
+    background: #115173;
+    height: 50px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px;
+    min-height: 150px;
+    box-sizing: border-box;
+}
