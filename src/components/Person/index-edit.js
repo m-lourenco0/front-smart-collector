@@ -2,13 +2,15 @@ import './index.scss';
 import { useForm } from 'react-hook-form';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const EditPerson = () => {
     
     let { id } = useParams();
     const [person, setPerson] = useState({});
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
+    const navigate = useNavigate();
 
     const getPersonData = async (id) => {
         await axios.get(`http://10.0.0.2:81/person/${id}`)
@@ -36,7 +38,7 @@ const EditPerson = () => {
             const status = res.status;
 
             if (status === 200) {
-                window.location.href = '/person';
+                navigate('/person');
             }
         })
         .catch(e => {
@@ -89,9 +91,8 @@ const EditPerson = () => {
                                     {errors.senha && <span className='error'>* Valor de senha é inválido</span>}
                                 </li>
                             </ul>
-                            <input type='submit' className='flat-button' value='Cadastrar'/>
+                            <input type='submit' className='flat-button' value='Atualizar'/>
                         </form>
-                        <button className='flat-button' onClick={() => {reset()}}>Limpar</button>
                     </div>
                 </div>
             </div>

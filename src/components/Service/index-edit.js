@@ -2,7 +2,7 @@ import './index.scss';
 import { useForm } from 'react-hook-form';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const EditService = () => {
     
@@ -11,13 +11,9 @@ const EditService = () => {
     const [vehicle, setVehicle] = useState({});
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const getServiceData = async (id) => {
-        await axios.get(`http://10.0.0.2:81/service/${id}`)
-        .then(res => {
-            setService(res.data[0]['data'][0]);
-            getVehicleData(res.data[0]['data'][0].id_Veiculo);
-        });
-    }
+    const navigate = useNavigate();
+
+    
 
     const getVehicleData = async (id) => {
         await axios.get(`http://10.0.0.2:81/vehicle/${id}`)
@@ -27,6 +23,13 @@ const EditService = () => {
     }
 
     useEffect(() => {
+        const getServiceData = async (id) => {
+            await axios.get(`http://10.0.0.2:81/service/${id}`)
+            .then(res => {
+                setService(res.data[0]['data'][0]);
+                getVehicleData(res.data[0]['data'][0].id_Veiculo);
+            });
+        }
         getServiceData(id);
     }, [id]);
 
@@ -43,7 +46,7 @@ const EditService = () => {
             const status = res.status;
 
             if (status === 200) {
-                window.location.href = '/service';
+                navigate('/service');
             }
         })
         .catch(e => {
@@ -53,7 +56,7 @@ const EditService = () => {
     }
 
     const handleVoltar = () => {
-        window.location.href = '/service';
+        navigate('/service');
     }
     
 
