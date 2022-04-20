@@ -1,7 +1,7 @@
 import './index.scss';
 import { useForm } from 'react-hook-form';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axios';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -12,7 +12,9 @@ const Person = () => {
     const [personList, setPersonList] = useState([]);
 
     const getPerson = async () => {
-        const res = await axios.get('http://10.0.0.2:81/person');
+        const res = await axios.get('/person', {
+            headers: { 'Content-Type': 'application/json' },
+        });
         setPersonList(res.data[0]['data']);
     }
 
@@ -21,14 +23,17 @@ const Person = () => {
       }, []);
 
     const onSubmit = async (data) => {
-        console.log(data)
-        await axios.post('http://10.0.0.2:81/person/add', data)
+        await axios.post('/person/add', data, {
+            headers: { 'Content-Type': 'application/json' },
+        })
         getPerson();
         reset();
     }
 
     const deletePerson = async (id) => {
-        await axios.post(`http://10.0.0.2:81/person/delete/${id}`);
+        await axios.post(`/person/delete/${id}`,{
+            headers: { 'Content-Type': 'application/json' },
+        });
         getPerson();
     }
 

@@ -1,6 +1,6 @@
 import './index.scss';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axios';
 import { faTrash, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,9 @@ const Service = () => {
     const [vehicle, setVehicle] = useState([]);
 
     const getService = async () => {
-        const res = await axios.get('http://10.0.0.2:81/service');
+        const res = await axios.get('/service',{
+            headers: { 'Content-Type': 'application/json' },
+        });
         setServiceList(res.data[0]['data']);
     }
 
@@ -20,14 +22,18 @@ const Service = () => {
       }, []);
 
     const getVehicleData = async (id) => {
-        await axios.get(`http://10.0.0.2:81/vehicle/${id}`)
+        await axios.get(`/vehicle/${id}`,{
+            headers: { 'Content-Type': 'application/json' },
+        })
         .then(res => {
             setVehicle(res.data[0]['data'][0]['ds_Veiculo']);
         });
     }
 
     const deleteService = async (id) => {
-        await axios.post(`http://10.0.0.2:81/service/delete/${id}`);
+        await axios.post(`/service/delete/${id}`,{
+            headers: { 'Content-Type': 'application/json' },
+        });
         getService();
     }
 

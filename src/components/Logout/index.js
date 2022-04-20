@@ -1,7 +1,10 @@
+import useAuth from "../../hooks/useAuth";
+
+
 
 const Logout = () => {
-
-    localStorage.setItem('user', 'logged out');
+    const { setAuth } = useAuth();
+    // setAuth({});
 }
 
 export default Logout;

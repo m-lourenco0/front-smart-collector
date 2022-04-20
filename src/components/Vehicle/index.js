@@ -1,7 +1,7 @@
 import './index.scss';
 import { useForm } from 'react-hook-form';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axios';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -12,7 +12,9 @@ const Vehicle = () => {
     const [vehicleList, setVehicleList] = useState([]);
 
     const getVehicles = async () => {
-        const res = await axios.get('http://10.0.0.2:81/vehicle');
+        const res = await axios.get('/vehicle',{
+            headers: { 'Content-Type': 'application/json' },
+        });
         setVehicleList(res.data[0]['data']);
     }
 
@@ -21,13 +23,17 @@ const Vehicle = () => {
       }, []);
 
     const onSubmit = async (data) => {
-        await axios.post('http://10.0.0.2:81/vehicle/add', data)
+        await axios.post('/vehicle/add', data,{
+            headers: { 'Content-Type': 'application/json' },
+        })
         getVehicles();
         reset();
     }
 
     const deleteVehicle = async (id) => {
-        await axios.post(`http://10.0.0.2:81/vehicle/delete/${id}`);
+        await axios.post(`/vehicle/delete/${id}`,{
+            headers: { 'Content-Type': 'application/json' },
+        });
         getVehicles();
     }
 

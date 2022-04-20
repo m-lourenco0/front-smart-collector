@@ -32,7 +32,6 @@ const Sidebar = () => {
             <ul>
                 <li>
                     <NavLink exact="true" activeclassname='active' className='service' to='/login'>
-                        <Logout />
                         <FontAwesomeIcon icon={faArrowRightFromBracket} color='#4d4d4e' />
                     </NavLink>
                 </li>

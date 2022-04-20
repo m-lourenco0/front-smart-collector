@@ -1,7 +1,7 @@
 import './index.scss';
 import { useForm } from 'react-hook-form';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const EditVehicle = () => {
@@ -13,7 +13,9 @@ const EditVehicle = () => {
     const navigate = useNavigate();
 
     const getVehicleData = async (id) => {
-        await axios.get(`http://10.0.0.2:81/vehicle/${id}`)
+        await axios.get(`/vehicle/${id}`,{
+            headers: { 'Content-Type': 'application/json' },
+        })
         .then(res => {
             setVehicle(res.data[0]['data'][0]);
         });
@@ -25,11 +27,13 @@ const EditVehicle = () => {
 
     const updateSubmit = async (data) => {
         console.log(data.nome)
-        await axios.put(`http://10.0.0.2:81/vehicle/`, {
+        await axios.put(`/vehicle/`, {
             id: id,
             nome: data.nome.length > 0  ? data.nome : vehicle.ds_Veiculo,
             capacidade: data.capacidade.length > 0  ? data.capacidade : vehicle.vl_CapacidadeKG,
             placa: data.placa.length > 0 ? data.placa : vehicle.cd_Placa,
+        },{
+            headers: { 'Content-Type': 'application/json' },
         })
         .then((res) => {
             const status = res.status;

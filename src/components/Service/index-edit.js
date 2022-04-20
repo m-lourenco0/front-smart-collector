@@ -1,7 +1,7 @@
 import './index.scss';
 import { useForm } from 'react-hook-form';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const EditService = () => {
@@ -16,7 +16,9 @@ const EditService = () => {
     
 
     const getVehicleData = async (id) => {
-        await axios.get(`http://10.0.0.2:81/vehicle/${id}`)
+        await axios.get(`/vehicle/${id}`,{
+            headers: { 'Content-Type': 'application/json' },
+        })
         .then(res => {
             setVehicle(res.data[0]['data'][0]);
         });
@@ -24,7 +26,9 @@ const EditService = () => {
 
     useEffect(() => {
         const getServiceData = async (id) => {
-            await axios.get(`http://10.0.0.2:81/service/${id}`)
+            await axios.get(`/service/${id}`,{
+                headers: { 'Content-Type': 'application/json' },
+            })
             .then(res => {
                 setService(res.data[0]['data'][0]);
                 getVehicleData(res.data[0]['data'][0].id_Veiculo);
@@ -34,13 +38,15 @@ const EditService = () => {
     }, [id]);
 
     const updateSubmit = async (data) => {
-        await axios.put(`http://10.0.0.2:81/service/`, {
+        await axios.put(`/service/`, {
             id: id,
             veiculo: service.id_Veiculo,
             peso: service.vl_Peso,
             data_saida: service.dt_Saida,
             data_chegada: data.data_chegada,
             status: data.status
+        },{
+            headers: { 'Content-Type': 'application/json' },
         })
         .then((res) => {
             const status = res.status;

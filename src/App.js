@@ -9,8 +9,8 @@ import EditPerson from './components/Person/index-edit';
 import Service from './components/Service';
 import EditService from './components/Service/index-edit';
 import Login from './components/Login';
-import PublicRoutes from './components/PublicRoutes';
-import ProtectedRoutes from './components/ProtectedRoutes';
+import RequireAuth from './components/RequireAuth';
+import Unauthorized from './components/Unauthorized';
 
 
 function App() {
@@ -19,20 +19,31 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<ProtectedRoutes />}>
-          <Route path='/' element={<Layout />}>
-            <Route path= '/' element={<Navigate to="home"/>} />
+        {/* Rotas públicas */}
+        <Route path='/unauthorized' element={<Unauthorized />} />
+        <Route path='/login' element={<Login />}/>
+
+        {/* Rotas privadas*/}
+        <Route element={<RequireAuth allowedRoles={[1000, 2000, 3000]}/>}>
+          <Route path='/' element={<Layout />} >
+            <Route path='/' element={<Navigate to="home"/>} />
             <Route path="home" element={<Home />} />
-            <Route path="vehicle" element={<Vehicle />} />
-            <Route path="vehicle/:id" element={<EditVehicle />} />
-            <Route path="person" element={<Person />} />
-            <Route path="person/:id" element={<EditPerson />} />
             <Route path="service" element={<Service />} />
             <Route path="service/:id" element={<EditService />} />
+
+              {/* Rotas privadas - usuário comum */}
+            <Route element={<RequireAuth allowedRoles={[2000, 3000]}/>}>
+              <Route path="vehicle" element={<Vehicle />} />
+              <Route path="vehicle/:id" element={<EditVehicle />} />
+              <Route path="person" element={<Person />} />
+            </Route>
+
+              {/* Rotas privadas - usuário administrador */}
+            <Route element={<RequireAuth allowedRoles={[3000]}/>}>
+              <Route path="person/:id" element={<EditPerson />} />
+            </Route>
+
           </Route>
-        </Route>
-        <Route path='login' element={<PublicRoutes />}>
-          <Route path='/login' element={<Login />}/>
         </Route>
       </Routes>
     </>
