@@ -1,8 +1,9 @@
 import './index.scss';
 import { useForm } from 'react-hook-form';
 import React, { useState, useEffect } from 'react';
-import axios from '../../api/axios';
+import axios from '../../../api/axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import IsAuthorized from '../../IsAuthorized';
 
 const EditService = () => {
     
@@ -83,8 +84,10 @@ const EditService = () => {
                         <h3>Data de Chegada: <span>{service.dt_Chegada ? service.dt_Chegada : 'Sem data'}</span></h3>
                         <h3>Status: <span>{service.st_Status}</span></h3>
                     </div>
-
+                    
                     <div className='contact-form'>
+                        
+                    {IsAuthorized([2000, 3000]) && 
                     <form onSubmit={handleSubmit(updateSubmit)}>
                             <ul>
                                 <li className='half'>
@@ -103,7 +106,8 @@ const EditService = () => {
                                 </li>
                             </ul>
                             <input type='submit' className='flat-button' value='Salvar'/>
-                        </form>
+                        </form>}
+                    
                         <button className='flat-button' onClick={handleVoltar}>Voltar</button>
                     </div>
                 </div>

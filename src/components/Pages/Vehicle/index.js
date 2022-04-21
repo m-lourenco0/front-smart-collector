@@ -1,7 +1,7 @@
 import './index.scss';
 import { useForm } from 'react-hook-form';
 import React, { useState, useEffect } from 'react';
-import axios from '../../api/axios';
+import axios from '../../../api/axios';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -31,7 +31,7 @@ const Vehicle = () => {
     }
 
     const deleteVehicle = async (id) => {
-        await axios.post(`/vehicle/delete/${id}`,{
+        await axios.delete(`/vehicle/delete/${id}`,{
             headers: { 'Content-Type': 'application/json' },
         });
         getVehicles();

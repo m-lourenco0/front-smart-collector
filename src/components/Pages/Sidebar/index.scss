@@ -1,6 +1,6 @@
 .nav-bar {
     background: #181818;
-    width: 65px;
+    width: 70px;
     height: 100%;
     position: absolute;
     top: 0;
@@ -80,31 +80,37 @@
 
         a.about-link {
             &::after {
-                content: 'ABOUT';
+                content: 'SOBRE';
             }
         }
 
         a.contact-link {
             &::after {
-                content: 'CONTACT';
+                content: 'CONTATOS';
             }
         }
 
         a.vehicle {
             &::after {
-                content: 'VEHICLES';
+                content: 'VEÍCULOS';
             }
         }
 
         a.person {
             &::after {
-                content: 'PEOPLE';
+                content: 'PESSOAS';
             }
         }
 
         a.service {
             &::after {
-                content: 'SERVICES';
+                content: 'SERVIÇOS';
+            }
+        }
+
+        a.new-service {
+            &::after {
+                content: 'ADICIONAR';
             }
         }
 

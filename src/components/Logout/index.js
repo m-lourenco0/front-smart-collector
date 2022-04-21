@@ -1,10 +1,8 @@
-import useAuth from "../../hooks/useAuth";
+// // import useAuth from "../../hooks/useAuth";
 
+// const Logout = () => {
+//     // const { setAuth } = useAuth();
+//     // setAuth({});
+// }
 
-
-const Logout = () => {
-    const { setAuth } = useAuth();
-    // setAuth({});
-}
-
-export default Logout;
+// export default Logout;

@@ -1,6 +1,6 @@
 import './index.scss';
 import React, { useState, useEffect } from 'react';
-import axios from '../../api/axios';
+import axios from '../../../api/axios';
 import { faTrash, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -18,7 +18,7 @@ const Service = () => {
     }
 
     useEffect(() => {
-          getService();
+        getService();
       }, []);
 
     const getVehicleData = async (id) => {
@@ -31,7 +31,7 @@ const Service = () => {
     }
 
     const deleteService = async (id) => {
-        await axios.post(`/service/delete/${id}`,{
+        await axios.delete(`/service/delete/${id}`,{
             headers: { 'Content-Type': 'application/json' },
         });
         getService();
@@ -60,7 +60,7 @@ const Service = () => {
                         </thead>
                         <tbody>
                             { serviceList.map((item) => {
-
+                                
                                 getVehicleData(item.id_Veiculo);
 
                                 return (

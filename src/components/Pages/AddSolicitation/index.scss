@@ -1,0 +1,153 @@
+.contact-form {
+    width: 100%;
+    margin-top: 20px;
+    align-content: space-between;
+    align-items: center;
+
+    .flat-button {
+        color: #ffd700;
+        margin-left: 15px;
+        margin-top: 110px;
+        font-size: 13px;
+        font-weight: 400;
+        letter-spacing: 4px;
+        font-family: sans-serif;
+        text-decoration: none;
+        padding: 15px;
+        border: 1px solid #ffd700;
+        background-color: transparent;
+        float: right;
+        white-space: nowrap;
+        cursor: pointer;
+    
+        &:hover {
+            background-color: #ffd700;
+            color: #333;
+        }
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            margin-bottom: 10px;
+            overflow: hidden;
+            display: inline-block;
+            position: relative;
+            opacity: 0;
+            clear: both;
+            justify-content: space-between;
+        }
+
+        li.half {
+            width: 32%;
+            margin-left: 2%;
+            float: left;
+            clear: none;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+
+        .error {
+            font-size: 13px;
+            color: #fff;
+            margin-left: 5px;
+        }
+    }
+
+    
+}
+
+.coleta-input {
+
+    margin-bottom: 40px;
+
+    input[type='text'],
+    input[type='number'],
+    input[type='datetime-local'],
+    select {
+        width: 25%;
+        border: 0;
+        background: #115173;
+        height: 50px;
+        font-size: 16px;
+        color: #fff;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        width: 100%;
+        border: 0;
+        background: #115173;
+        height: 50px;
+        font-size: 16px;
+        color: #fff;
+        padding: 20px;
+        min-height: 150px;
+        box-sizing: border-box;
+}
+}
+
+
+
+.text-zone-people {
+    position: absolute;
+    left: 10%;
+    margin-top: 50px;
+    width: 82%;
+    vertical-align: middle;
+    display: table-cell;
+    max-height: 90%;
+
+    h1 {
+        font-size: 35px;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 400;
+        color: #ffd700;
+        margin-top: 0;
+        position: relative;
+        margin-bottom: 40px;
+        left: 10px;
+    }
+
+    label {
+        font-size: 20px;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 300;
+        color: #fff;
+        margin-top: 0;
+        position: relative;
+        margin-bottom: 10px;
+        left: 5px;
+    }
+
+    p {
+        font-style: 13px;
+        color: #fff;
+        font-family: sans-serif;
+        font-weight: 300;
+        min-width: fit-content;
+    }
+}
+
+.service-info {
+    h3 {
+        margin: 2px;
+        font-weight: 490;
+        font-size: 20px;
+        color: #fff;
+
+        span {
+            font-size: 18px;
+            font-weight: 300;
+            color: #ffd700;
+        }
+    }
+}

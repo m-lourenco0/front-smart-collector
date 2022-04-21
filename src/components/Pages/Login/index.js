@@ -1,17 +1,15 @@
 import './index.scss';
 import { useEffect, useRef, useState } from 'react';
-import useAuth from '../../hooks/useAuth';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
-import axios from '../../api/axios';
+import axios from '../../../api/axios';
 const LOGIN_URL = 'login/'
 
 const Login = () => {
     const { setAuth } = useAuth();
 
     const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
 
     const userRef = useRef();
     const errRef = useRef();
@@ -62,8 +60,6 @@ const Login = () => {
     return (
         <>
             <section className='login-form'>
-                
-                
                 <form className='login-form-inner' onSubmit={handleSubmit}>
                     <h1 className='title'>Logar</h1>
                     <p ref={errRef} className={err ? 'errmsg' : 'offscreen'} aria-live='assertive'>{err}</p>
