@@ -59,40 +59,41 @@ const EditPerson = () => {
                     <form onSubmit={handleSubmit(updateSubmit)}>
                             <ul>
                                 <li className='half'>
-                                    <label>Nome</label>
+                                    <label>Nome: </label>
                                     <input defaultValue={person.ds_Pessoa} type='text' name='nome' placeholder='Nome' {...register('nome')}/>
                                     {errors.nome && <span className='error'>* Nome da pessoa é inválido</span>}
                                 </li>
                                 <li className='half'>
-                                    <label>Endereço</label>
+                                    <label>Endereço: </label>
                                     <input defaultValue={person.ds_Endereco} type='text' name='endereco' placeholder='Endereco' {...register('endereco')}/>
                                     {errors.endereco && <span className='error'>* Valor de endereco é inválido</span>}
                                 </li>
                                 <li className='half'>
-                                    <label>Bairro</label>
+                                    <label>Bairro: </label>
                                     <input defaultValue={person.ds_Bairro} type='text' name='bairro' placeholder='Bairro' {...register('bairro')}/>
                                     {errors.bairro && <span className='error'>* Valor de bairro é inválido</span>}
                                 </li>
                             </ul>
                             <ul>
                                 <li className='half'>
-                                    <label>Número</label>
+                                    <label>Número: </label>
                                     <input defaultValue={person.nr_Endereco} type='number' name='numero' placeholder='Número' {...register('numero')}/>
                                     {errors.numero && <span className='error'>* Valor de número é inválido</span>}
                                 </li>
                                 <li className='half'>
-                                    <label>Login</label>
+                                    <label>Login: </label>
                                     <input defaultValue={person.ds_Login} type='text' name='login' placeholder='Login' {...register('login')}/>
                                     {errors.login && <span className='error'>* Valor de login é inválido</span>}
                                 </li>
                                 <li className='half'>
-                                    <label>Senha</label>
+                                    <label>Senha: </label>
                                     <input defaultValue={person.ds_Senha} type='text' name='senha' placeholder='Senha' {...register('senha')}/>
                                     {errors.senha && <span className='error'>* Valor de senha é inválido</span>}
                                 </li>
                             </ul>
-                            <input type='submit' className='flat-button' value='Atualizar'/>
+                            <input type='submit' className='person-button' value='Atualizar'/>
                         </form>
+                        <button className='vehicle-button' onClick={() => navigate('/person')}>Voltar</button>
                     </div>
                 </div>
             </div>

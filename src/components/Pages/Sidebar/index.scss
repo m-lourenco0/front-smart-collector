@@ -1,6 +1,6 @@
 .nav-bar {
     background: #181818;
-    width: 70px;
+    width: 80px;
     height: 100%;
     position: absolute;
     top: 0;
@@ -114,11 +114,24 @@
             }
         }
 
+        a.route {
+            &::after {
+                content: 'ROTEIRIZAR';
+            }
+        }
+
+        a.solicitation {
+            &::after {
+                content: 'SOLICITAÇÃO';
+            }
+        }
+
         a.active {
             svg {
                 color: #ffd700;
             }
         }
+
     }
 
     ul {
@@ -145,3 +158,4 @@
         }
     }
 }
+

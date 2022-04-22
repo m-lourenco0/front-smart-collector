@@ -26,8 +26,7 @@ const EditVehicle = () => {
     }, [id]);
 
     const updateSubmit = async (data) => {
-        console.log(data.nome)
-        await axios.put(`/vehicle/`, {
+        await axios.put(`/vehicle/${vehicle.id_Veiculo}`, {
             id: id,
             nome: data.nome.length > 0  ? data.nome : vehicle.ds_Veiculo,
             capacidade: data.capacidade.length > 0  ? data.capacidade : vehicle.vl_CapacidadeKG,
@@ -60,23 +59,24 @@ const EditVehicle = () => {
                         <form onSubmit={handleSubmit(updateSubmit)}>
                             <ul>
                                 <li className='half'>
-                                    <label>Veículo</label>
+                                    <label>Veículo: </label>
                                     <input defaultValue={vehicle.ds_Veiculo} type='text' name='nome' placeholder='Veículo' {...register('nome')}/>
                                     {errors.capacidade && <span className='error'>* Nome do veículo é inválido</span>}
                                 </li>
                                 <li className='half'>
-                                    <label>Capacidade (KG)</label>
+                                    <label>Capacidade (KG): </label>
                                     <input defaultValue={vehicle.vl_CapacidadeKG} type='number' name='capacidade' placeholder='Capacidade (KG)' {...register('capacidade')}/>
                                     {errors.capacidade && <span className='error'>* Valor de capacidade é inválido</span>}
                                 </li>
                                 <li className='half'>
-                                    <label>Placa</label>
+                                    <label>Placa: </label>
                                     <input defaultValue={vehicle.cd_Placa} id='placa' placeholder='Placa' type='text' name='placa' {...register('placa')}/>
                                     {errors.placa && <span className='error'>* Valor da placa é inválido</span>}
                                 </li>
                             </ul>
-                            <input type='submit' className='flat-button' alt='Salvar' value='Atualizar'/>
+                            <input type='submit' className='vehicle-button' alt='Salvar' value='Atualizar'/>
                         </form>
+                        <button className='vehicle-button' onClick={() => navigate('/vehicle')}>Voltar</button>
                     </div>
                 </div>
             </div>

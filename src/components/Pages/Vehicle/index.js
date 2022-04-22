@@ -49,24 +49,24 @@ const Vehicle = () => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <ul>
                                 <li className='half'>
-                                    <label>Veículo</label>
+                                    <label>Veículo: </label>
                                     <input type='text' name='nome' placeholder='Veículo' {...register('nome', { required: true })}/>
                                     {errors.capacidade && <span className='error'>* Nome do veículo é inválido</span>}
                                 </li>
                                 <li className='half'>
-                                    <label>Capacidade (KG)</label>
+                                    <label>Capacidade (KG): </label>
                                     <input type='number' name='capacidade' placeholder='Capacidade (KG)' {...register('capacidade', { required: true })}/>
                                     {errors.capacidade && <span className='error'>* Valor de capacidade é inválido</span>}
                                 </li>
                                 <li className='half'>
-                                    <label>Placa</label>
+                                    <label>Placa: </label>
                                     <input id='placa' placeholder='Placa' type='text' name='placa' {...register('placa', { required: true, maxLength: 8 })}/>
                                     {errors.placa && <span className='error'>* Valor da placa é inválido</span>}
                                 </li>
                             </ul>
-                            <input type='submit' className='flat-button' value='Cadastrar'/>
+                            <input type='submit' className='vehicle-button' value='Cadastrar'/>
                         </form>
-                        <button className='flat-button' onClick={() => {reset()}}>Limpar</button>
+                        <button className='vehicle-button' onClick={() => {reset()}}>Limpar</button>
                     </div>
 
                     { vehicleList.length > 0 &&

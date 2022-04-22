@@ -12,6 +12,8 @@ import Login from './components/Pages/Login';
 import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/Unauthorized';
 import AddSolicitation from './components/Pages/AddSolicitation';
+import CreateRoute from './components/Pages/CreateRoute';
+import SolicitationList from './components/Pages/SolicitationList';
 
 
 function App() {
@@ -31,12 +33,14 @@ function App() {
             <Route path="home" element={<Home />} />
             <Route path="service" element={<Service />} />
             <Route path="service/:id" element={<EditService />} />
+            <Route path="solicitation" element={<SolicitationList />} />
 
             {/* Rotas privadas - usuário comum */}
             <Route element={<RequireAuth allowedRoles={[2000, 3000]}/>}>
               <Route path="vehicle" element={<Vehicle />} />
               <Route path="vehicle/:id" element={<EditVehicle />} />
               <Route path="person" element={<Person />} />
+              <Route path="service/new" element={<CreateRoute />} />
             </Route>
 
             {/* Rotas privadas - usuário administrador */}

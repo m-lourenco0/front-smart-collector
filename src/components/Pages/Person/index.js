@@ -49,39 +49,39 @@ const Person = () => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <ul>
                                 <li className='half'>
-                                    <label>Nome</label>
+                                    <label>Nome: </label>
                                     <input type='text' name='nome' placeholder='Nome' {...register('nome', { required: true })}/>
                                     {errors.nome && <span className='error'>* Nome da pessoa é inválido</span>}
                                 </li>
                                 <li className='half'>
-                                    <label>Endereço</label>
+                                    <label>Endereço: </label>
                                     <input type='text' name='endereco' placeholder='Endereco' {...register('endereco', { required: true })}/>
                                     {errors.endereco && <span className='error'>* Valor de endereco é inválido</span>}
                                 </li>
                                 <li className='half'>
-                                    <label>Bairro</label>
+                                    <label>Bairro: </label>
                                     <input type='text' name='bairro' placeholder='Bairro' {...register('bairro', { required: true })}/>
                                     {errors.bairro && <span className='error'>* Valor de bairro é inválido</span>}
                                 </li>
                             </ul>
                             <ul>
                                 <li className='half'>
-                                    <label>Número</label>
+                                    <label>Número: </label>
                                     <input type='number' name='numero' placeholder='Número' {...register('numero', { required: true, minLength: 1 })}/>
                                     {errors.numero && <span className='error'>* Valor de número é inválido</span>}
                                 </li>
                                 <li className='half'>
-                                    <label>Login</label>
+                                    <label>Login: </label>
                                     <input type='text' name='login' placeholder='Login' {...register('login', { required: true, minLength: 5 })}/>
                                     {errors.login && <span className='error'>* Valor de login é inválido</span>}
                                 </li>
                                 <li className='half'>
-                                    <label>Senha</label>
+                                    <label>Senha: </label>
                                     <input type='text' name='senha' placeholder='Senha' {...register('senha', { required: true, minLength: 8 })}/>
                                     {errors.senha && <span className='error'>* Valor de senha é inválido</span>}
                                 </li>
                             </ul>
-                            <input type='submit' className='flat-button' value='Cadastrar'/>
+                            <input type='submit' className='person-button' value='Cadastrar'/>
                         </form>
                     </div>
 

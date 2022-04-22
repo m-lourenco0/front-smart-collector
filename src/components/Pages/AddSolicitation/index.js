@@ -1,6 +1,5 @@
 import './index.scss';
 import axios from '../../../api/axios';
-import IsAuthorized from '../../IsAuthorized';
 import useAuth from '../../../hooks/useAuth';
 
 import React, { useState, useEffect } from 'react';
@@ -41,7 +40,7 @@ const AddSolicitation = () => {
             if (status === 200) {
                 setPerson({});
                 setObs('');
-                navigate('/service');
+                navigate('/solicitation');
             }
         })
         .catch((err) => {
@@ -51,7 +50,7 @@ const AddSolicitation = () => {
     }
 
     const handleVoltar = () => {
-        navigate('/service');
+        navigate('/solicitation');
     }
     
     
@@ -73,7 +72,7 @@ const AddSolicitation = () => {
                                 name='endereco'
                                 placeholder='Endereço'
                                 value={person.ds_Endereco}
-                                onChange={(e) => {setPerson({...person, ['ds_Endereco']: e.target.value})}}
+                                onChange={(e) => {setPerson({...person, ds_Endereco: e.target.value})}}
                                 required
                             />
                             <h3 >Bairro:</h3>
@@ -82,7 +81,7 @@ const AddSolicitation = () => {
                                 name='bairro'
                                 placeholder='Bairro'
                                 value={person.ds_Bairro}
-                                onChange={(e) => {setPerson({...person, ['ds_Bairro']: e.target.value})}}
+                                onChange={(e) => {setPerson({...person, ds_Bairro: e.target.value})}}
                                 required
                             />
                             <h3 >Número:</h3>
@@ -91,7 +90,7 @@ const AddSolicitation = () => {
                                 name='numero'
                                 placeholder='Número'
                                 value={person.nr_Endereco}
-                                onChange={(e) => {setPerson({...person, ['nr_Endereco']: e.target.value})}}
+                                onChange={(e) => {setPerson({...person, nr_Endereco: e.target.value})}}
                                 required
                             />
                             <h3>Observações:</h3>
@@ -103,10 +102,7 @@ const AddSolicitation = () => {
                         </form>
                         <h3>Data de Solicitação: <span>{new Date().toLocaleDateString('pt-BR')}</span></h3>
                         <h3>Usuário Solicitante: <span>{person.ds_Pessoa}</span></h3>
-                        
                     </div>
-                    
-                    
                 </div>
             </div>
         </>
