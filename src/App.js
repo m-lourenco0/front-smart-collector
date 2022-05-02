@@ -15,6 +15,7 @@ import Unauthorized from './components/Unauthorized';
 import AddSolicitation from './components/Pages/AddSolicitation';
 import CreateRoute from './components/Pages/CreateRoute';
 import SolicitationList from './components/Pages/SolicitationList';
+import EditSolicitation from './components/Pages/SolicitationList/index-edit';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
               <Route path="service" element={<Service />} />
               <Route path="service/:id" element={<EditService />} />
               <Route path="solicitation" element={<SolicitationList />} />
+              <Route path="solicitation/:id" element={<EditSolicitation />} />
 
               {/* Rotas privadas - usuário comum */}
               <Route element={<RequireAuth allowedRoles={[2000, 3000]}/>}>

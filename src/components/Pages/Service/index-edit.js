@@ -22,7 +22,7 @@ const EditService = () => {
 
     useEffect(() => {
         const getServiceData = async (id) => {
-            await axiosPrivate.get(`/service/${id}/`)
+            await axiosPrivate.get(`/service/${id}`)
             .then(res => {
                 setService(res.data[0]['data'][0]);
             });
@@ -64,7 +64,7 @@ const EditService = () => {
     }
     
     async function calculateRoute() {
-        
+        debugger
         const waypoint = service?.ds_Waypoints.split('|');
         const waypoints = waypoint.map (waypoint => {
             return {

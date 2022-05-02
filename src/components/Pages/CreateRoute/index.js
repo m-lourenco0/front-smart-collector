@@ -16,7 +16,7 @@ const CreateRoute = () => {
     const axiosPrivate = useAxiosPrivate();
 
     const getSolicitations = async () => {
-        await axiosPrivate.get('/solicitation/list')
+        await axiosPrivate.get('/solicitation/list/')
         .then(res => {
             setSolicitationList(res.data['data']);
         })
@@ -26,7 +26,7 @@ const CreateRoute = () => {
     }
 
     const getVehicles = async () => {
-        await axiosPrivate.get('/vehicle')
+        await axiosPrivate.get('/vehicle/')
         .then(res => {
             setVehicleList(res.data[0].data);
         })
