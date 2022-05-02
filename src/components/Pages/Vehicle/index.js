@@ -29,7 +29,7 @@ const Vehicle = () => {
     }
 
     const deleteVehicle = async (id) => {
-        await axiosPrivate.delete(`/vehicle/delete/${id}/`);
+        await axiosPrivate.delete(`/vehicle/delete/${id}`);
         getVehicles();
     }
 

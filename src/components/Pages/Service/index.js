@@ -23,7 +23,7 @@ const Service = () => {
       }, []);
 
     const deleteService = async (id) => {
-        await axiosPrivate.delete(`/service/delete/${id}/`);
+        await axiosPrivate.delete(`/service/delete/${id}`);
         getService();
     }
 
