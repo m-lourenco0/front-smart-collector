@@ -1,6 +1,6 @@
 import './index.scss';
 import React, { useState, useEffect } from 'react';
-import axios from '../../../api/axios';
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import { faTrash, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,13 +9,12 @@ import IsAuthorized from '../../IsAuthorized';
 const Service = () => {
 
     const navigate = useNavigate();
+    const axiosPrivate = useAxiosPrivate();
 
     const [serviceList, setServiceList] = useState([]);
 
     const getService = async () => {
-        const res = await axios.get('/service',{
-            headers: { 'Content-Type': 'application/json' },
-        });
+        const res = await axiosPrivate.get('/service/');
         setServiceList(res.data[0]['data']);
     }
 
@@ -24,9 +23,7 @@ const Service = () => {
       }, []);
 
     const deleteService = async (id) => {
-        await axios.delete(`/service/delete/${id}`,{
-            headers: { 'Content-Type': 'application/json' },
-        });
+        await axiosPrivate.delete(`/service/delete/${id}/`);
         getService();
     }
 
@@ -69,7 +66,9 @@ const Service = () => {
                                             <Link className='update-button' to={"/service/" + item.id_Coleta} >
                                                  <FontAwesomeIcon icon={faMagnifyingGlass} color='#fff' />
                                             </Link>
-                                            <button className='update-button' onClick={() => deleteService(item.id_Coleta)}><FontAwesomeIcon icon={faTrash} color='#d11a2a' /></button>
+                                            {IsAuthorized([2000, 3000]) &&
+                                            <button className='update-button' onClick={() => deleteService(item.id_Coleta)}><FontAwesomeIcon icon={faTrash} color='#d11a2a' /></button>}
+                                            
                                         </td>
                                         
                                     </tr>

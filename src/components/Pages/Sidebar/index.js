@@ -1,21 +1,24 @@
 import './index.scss';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import LogoS from '../../../assets/images/logo-s.png'
-import LogoSubtitle from '../../../assets/images/logo_sub.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUser, faTruck, faMapLocationDot, faArrowRightFromBracket, faPlusCircle, faClipboardList } from '@fortawesome/free-solid-svg-icons';
 import RequireAuthNavBar from '../../RequireAuthNavbar';
-// import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import useLogout from '../../Logout';
 
 const Sidebar = () => {
+    const navigate = useNavigate();
+    const logout = useLogout();
 
-
+    const signOut = async () => {
+        await logout();
+        navigate('/login');
+    }
 
     return (
         <div className='nav-bar'>
             <Link className='logo' to='/'>
                 <img src={LogoS} alt='logo' />
-                <img className='sub-logo' src={LogoSubtitle} alt='slobodan' />
             </Link>
             <nav>
                 <RequireAuthNavBar allowedRoles={[1000, 2000, 3000]}>
@@ -48,9 +51,9 @@ const Sidebar = () => {
             </nav>
             <ul>
                 <li>
-                    <NavLink exact="true" activeclassname='active' className='service' to='/login'>
+                    <button className='logout' onClick={signOut}>
                         <FontAwesomeIcon icon={faArrowRightFromBracket} color='#4d4d4e' />
-                    </NavLink>
+                    </button>
                 </li>
             </ul>
         </div>

@@ -1,7 +1,7 @@
 import './index.scss';
 import { useForm } from 'react-hook-form';
 import React, { useState, useEffect } from 'react';
-import axios from '../../../api/axios';
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const EditPerson = () => {
@@ -9,11 +9,11 @@ const EditPerson = () => {
     let { id } = useParams();
     const [person, setPerson] = useState({});
     const { register, handleSubmit, formState: { errors } } = useForm();
-
     const navigate = useNavigate();
+    const axiosPrivate = useAxiosPrivate();
 
     const getPersonData = async (id) => {
-        await axios.get(`/person/${id}`)
+        await axiosPrivate.get(`/person/${id}`)
         .then(res => {
             setPerson(res.data[0]['data'][0]);
         });
@@ -24,8 +24,7 @@ const EditPerson = () => {
     }, [id]);
 
     const updateSubmit = async (data) => {
-        console.log(data.nome)
-        await axios.put(`/person/`, {
+        await axiosPrivate.put(`/person/`, {
             id: id,
             nome: data.nome.length > 0  ? data.nome : person.ds_Pessoa,
             endereco: data.endereco.length > 0  ? data.endereco : person.ds_Endereco,
@@ -42,7 +41,6 @@ const EditPerson = () => {
             }
         })
         .catch(e => {
-            console.log(e);
             alert('Erro ao atualizar pessoa');
         })
     }

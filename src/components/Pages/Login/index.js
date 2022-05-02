@@ -2,6 +2,7 @@ import './index.scss';
 import { useEffect, useRef, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import parseJWT from '../../../helpers/parseJWT';
 
 import axios from '../../../api/axios';
 const LOGIN_URL = 'login/'
@@ -33,13 +34,13 @@ const Login = () => {
 
         try {
             const res = await axios.post(LOGIN_URL, 
-                JSON.stringify({user, pass}),{
-                    headers: { 'Content-Type': 'application/json' },
-                }
+                JSON.stringify({user, pass}),
                 );
-            const logged_user = res?.data?.user;
+            const token = res.data.token;
+            const parsed_token = parseJWT(token);
+            const logged_user = parsed_token?.sub
             const roles = res?.data?.permissions;
-            setAuth({ user, pass, roles, logged_user });
+            setAuth({ user, pass, roles, logged_user, token });
             setUser('');
             setPass('');
             navigate('/home');

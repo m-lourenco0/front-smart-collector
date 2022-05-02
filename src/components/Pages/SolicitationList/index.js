@@ -1,6 +1,6 @@
 import './index.scss';
 import React, { useState, useEffect } from 'react';
-import axios from '../../../api/axios';
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import { faTrash, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -8,16 +8,14 @@ import { Link } from 'react-router-dom';
 const SolicitationList = () => {
 
     const [solicitationList, setSolicitationList] = useState([]);
+    const axiosPrivate = useAxiosPrivate();
 
     const getSolicitations = async () => {
-        await axios.get('/solicitation/list',{
-            headers: { 'Content-Type': 'application/json' },
-        })
+        await axiosPrivate.get('/solicitation/list')
         .then(res => {
             setSolicitationList(res.data['data']);
         })
         .catch(err => {
-            console.log(err);
             alert('Erro ao buscar solicitações');
         });
         
@@ -28,9 +26,7 @@ const SolicitationList = () => {
       }, []);
 
     const deleteSolicitation = async (id) => {
-        await axios.delete(`/solicitation/delete/${id}`,{
-            headers: { 'Content-Type': 'application/json' },
-        });
+        await axiosPrivate.delete(`/solicitation/delete/${id}`);
         getSolicitations();
     }
 

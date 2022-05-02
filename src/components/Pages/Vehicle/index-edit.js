@@ -1,7 +1,7 @@
 import './index.scss';
 import { useForm } from 'react-hook-form';
 import React, { useState, useEffect } from 'react';
-import axios from '../../../api/axios';
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const EditVehicle = () => {
@@ -9,13 +9,11 @@ const EditVehicle = () => {
     let { id } = useParams();
     const [vehicle, setVehicle] = useState({});
     const { register, handleSubmit, formState: { errors } } = useForm();
-
+    const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
 
     const getVehicleData = async (id) => {
-        await axios.get(`/vehicle/${id}`,{
-            headers: { 'Content-Type': 'application/json' },
-        })
+        await axiosPrivate.get(`/vehicle/${id}`)
         .then(res => {
             setVehicle(res.data[0]['data'][0]);
         });
@@ -26,13 +24,11 @@ const EditVehicle = () => {
     }, [id]);
 
     const updateSubmit = async (data) => {
-        await axios.put(`/vehicle/${vehicle.id_Veiculo}`, {
+        await axiosPrivate.put(`/vehicle/${vehicle.id_Veiculo}`, {
             id: id,
             nome: data.nome.length > 0  ? data.nome : vehicle.ds_Veiculo,
             capacidade: data.capacidade.length > 0  ? data.capacidade : vehicle.vl_CapacidadeKG,
             placa: data.placa.length > 0 ? data.placa : vehicle.cd_Placa,
-        },{
-            headers: { 'Content-Type': 'application/json' },
         })
         .then((res) => {
             const status = res.status;
@@ -42,7 +38,6 @@ const EditVehicle = () => {
             }
         })
         .catch(e => {
-            console.log(e);
             alert('Erro ao atualizar veículo');
         })
     }

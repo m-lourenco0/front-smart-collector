@@ -1,5 +1,5 @@
 import './index.scss';
-import axios from '../../../api/axios';
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import useAuth from '../../../hooks/useAuth';
 
 import React, { useState, useEffect } from 'react';
@@ -14,6 +14,8 @@ const AddSolicitation = () => {
 
     const navigate = useNavigate();
 
+    const axiosPrivate = useAxiosPrivate();
+
     
     useEffect(() => {
         setPerson(auth.logged_user);
@@ -22,17 +24,17 @@ const AddSolicitation = () => {
     const handleSubmit = async (data) => {
         data.preventDefault();
 
-        await axios.post('solicitation/add', 
+        await axiosPrivate.post('solicitation/add', 
             JSON.stringify({
                 id_Pessoa: person.id_Pessoa,
                 ds_Endereco: person.ds_Endereco,
                 ds_Bairro: person.ds_Bairro,
                 nr_Endereco: person.nr_Endereco,
+                ds_Cidade: person.ds_Cidade,
+                ds_Estado: person.ds_Estado,
                 dt_Solicitacao: new Date().toLocaleDateString('pt-BR'),
                 ds_Observacao: obs,
-            }),{
-                headers: { 'Content-Type': 'application/json' },
-            }
+            })
         )
         .then((res) => {
             const status = res.status;
@@ -44,7 +46,6 @@ const AddSolicitation = () => {
             }
         })
         .catch((err) => {
-            console.log(err);
             alert('Erro ao criar solicitação');
         });
     }
@@ -91,6 +92,24 @@ const AddSolicitation = () => {
                                 placeholder='Número'
                                 value={person.nr_Endereco}
                                 onChange={(e) => {setPerson({...person, nr_Endereco: e.target.value})}}
+                                required
+                            />
+                            <h3 >Cidade:</h3>
+                            <input 
+                                type='text'
+                                name='cidade'
+                                placeholder='Cidade'
+                                value={person.ds_Cidade}
+                                onChange={(e) => {setPerson({...person, ds_Cidade: e.target.value})}}
+                                required
+                            />
+                            <h3 >Estado:</h3>
+                            <input 
+                                type='text'
+                                name='estado'
+                                placeholder='Estado'
+                                value={person.ds_Estado}
+                                onChange={(e) => {setPerson({...person, ds_Estado: e.target.value})}}
                                 required
                             />
                             <h3>Observações:</h3>

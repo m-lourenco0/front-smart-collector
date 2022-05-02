@@ -1,20 +1,20 @@
 import './index.scss';
 import { useForm } from 'react-hook-form';
 import React, { useState, useEffect } from 'react';
-import axios from '../../../api/axios';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 
 const Person = () => {
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [personList, setPersonList] = useState([]);
+    const axiosPrivate = useAxiosPrivate();
+
 
     const getPerson = async () => {
-        const res = await axios.get('/person', {
-            headers: { 'Content-Type': 'application/json' },
-        });
+        const res = await axiosPrivate.get('/person/');
         setPersonList(res.data[0]['data']);
     }
 
@@ -23,17 +23,13 @@ const Person = () => {
       }, []);
 
     const onSubmit = async (data) => {
-        await axios.post('/person/add', data, {
-            headers: { 'Content-Type': 'application/json' },
-        })
+        await axiosPrivate.post('/person/add', data);
         getPerson();
         reset();
     }
 
     const deletePerson = async (id) => {
-        await axios.delete(`/person/delete/${id}`,{
-            headers: { 'Content-Type': 'application/json' },
-        });
+        await axiosPrivate.delete(`/person/delete/${id}`);
         getPerson();
     }
 

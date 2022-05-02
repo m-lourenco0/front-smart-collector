@@ -1,23 +1,28 @@
 import './index.scss';
 import { useForm } from 'react-hook-form';
 import React, { useState, useEffect } from 'react';
-import axios from '../../../api/axios';
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import { useParams, useNavigate } from 'react-router-dom';
 import IsAuthorized from '../../IsAuthorized';
+import { GoogleMap, useJsApiLoader, DirectionsRenderer } from '@react-google-maps/api';
 
 const EditService = () => {
     
     let { id } = useParams();
     const [service, setService] = useState({});
+    const [directions, setDirections] = useState(/** @type google.maps.DirectionsResult */ (null));
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const navigate = useNavigate();
 
+    const center = {lat: -22.37498309146081, lng: -47.37011743571834}
+    const axiosPrivate = useAxiosPrivate();
+    
+
     useEffect(() => {
         const getServiceData = async (id) => {
-            await axios.get(`/service/${id}`,{
-                headers: { 'Content-Type': 'application/json' },
-            })
+            await axiosPrivate.get(`/service/${id}/`)
             .then(res => {
                 setService(res.data[0]['data'][0]);
             });
@@ -25,16 +30,22 @@ const EditService = () => {
         getServiceData(id);
     }, [id]);
 
+    const { isLoaded } = useJsApiLoader({
+        googleMapsApiKey: 'AIzaSyD175PxUd2mGLbrGd6YYwP35je2hHIuuLI',
+    });
+
+    if (!isLoaded) {
+        return <div>Loading...</div>;
+    }
+
     const updateSubmit = async (data) => {
-        await axios.put(`/service/`, {
+        await axiosPrivate.put(`/service/`, {
             id: id,
             veiculo: service.id_Veiculo,
             peso: service.vl_Peso,
             data_saida: service.dt_Saida,
             data_chegada: data.data_chegada,
             status: data.status
-        },{
-            headers: { 'Content-Type': 'application/json' },
         })
         .then((res) => {
             const status = res.status;
@@ -44,7 +55,6 @@ const EditService = () => {
             }
         })
         .catch(e => {
-            console.log(e);
             alert('Erro ao atualizar coleta');
         })
     }
@@ -53,6 +63,25 @@ const EditService = () => {
         navigate('/service');
     }
     
+    async function calculateRoute() {
+        
+        const waypoint = service?.ds_Waypoints.split('|');
+        const waypoints = waypoint.map (waypoint => {
+            return {
+                location: waypoint,
+                stopover: true
+            }
+        })
+
+        const directionsService = new window.google.maps.DirectionsService();
+        const results = await directionsService.route({
+            origin: service.ds_Origin,
+            destination: service.ds_Destination,
+            waypoints: waypoints,
+            travelMode: window.google.maps.TravelMode.DRIVING,
+        });
+        setDirections(results);
+    }
 
     return (
         <>
@@ -92,11 +121,28 @@ const EditService = () => {
                                 {errors.status && <span className='error'>* Status é obrigatório</span>}
                             </li>
                         </ul>
+                        
                         <input type='submit' className='service-button' value='Salvar'/>
                     </form>}
                         <button className='service-button' onClick={handleVoltar}>Voltar</button>
+                        <div className='map-container'>
+                            <button className='service-button-map' onClick={calculateRoute}>Mostrar Rota</button>
+                            <GoogleMap 
+                                center={center} 
+                                zoom={15}
+                                mapContainerClassName='map-render'
+                                options={{
+                                    mapTypeControl: false,
+                                }}
+                            >
+                                {directions && (
+                                    <DirectionsRenderer directions={directions} />
+                                )}
+                            </GoogleMap>
+                        </div>
                     </div>
                 </div>
+                
             </div>
         </>
     );

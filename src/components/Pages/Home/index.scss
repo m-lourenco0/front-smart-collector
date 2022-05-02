@@ -1,11 +1,33 @@
 .home-page {
+
+    .chart-zone {
+        position: relative;
+        left: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 70%;
+        max-height: 90%;
+
+        .text-animate {
+            margin-left: 10px;
+            font-size: 35px;
+            color: #fff;
+        }
+    }
+
     .text-zone {
         position: absolute;
         left: 10%;
         top: 50%;
         transform: translateY(-50%);
-        width: 40%;
+        width: 50%;
         max-height: 90%;
+    }
+
+    .prediction-text {
+        font-size: 45px;
+        color: #ffd700;
+        margin-right: 30px;
     }
 
     h1 {
@@ -14,6 +36,11 @@
         margin: 0;
         font-family: 'Nunito', sans-serif;
         font-weight: 400;
+
+        .text-animate {
+            font-size: 45px;
+            color: #8d8d8d;
+        }
 
         img {
             width: 32px;
@@ -30,7 +57,7 @@ h2 {
     color: #8d8d8d;
     margin-top: 20px;
     font-weight: 400;
-    font-size: 11px;
+    font-size: 19px;
     font-family: sans-serif;
     letter-spacing: 3px;
     animation: fadeIn 0s 0s backwards;
@@ -54,4 +81,8 @@ h2 {
         background-color: #ffd700;
         color: #333;
     }
+}
+
+.inner-text {
+    display: flex;
 }

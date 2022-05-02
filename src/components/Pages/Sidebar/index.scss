@@ -159,3 +159,13 @@
     }
 }
 
+.logout {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+
+    &:hover svg{
+        color: #ffd700;
+        cursor: pointer;
+    }
+}

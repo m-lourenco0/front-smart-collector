@@ -10,6 +10,7 @@ import Service from './components/Pages/Service';
 import EditService from './components/Pages/Service/index-edit';
 import Login from './components/Pages/Login';
 import RequireAuth from './components/RequireAuth';
+import PersistLogin from './components/PersistLogin';
 import Unauthorized from './components/Unauthorized';
 import AddSolicitation from './components/Pages/AddSolicitation';
 import CreateRoute from './components/Pages/CreateRoute';
@@ -27,32 +28,34 @@ function App() {
         <Route path='/login' element={<Login />}/>
 
         {/* Rotas privadas*/}
-        <Route element={<RequireAuth allowedRoles={[1000, 2000, 3000]}/>}>
-          <Route path='/' element={<Layout />} >
-            <Route path='/' element={<Navigate to="home"/>} />
-            <Route path="home" element={<Home />} />
-            <Route path="service" element={<Service />} />
-            <Route path="service/:id" element={<EditService />} />
-            <Route path="solicitation" element={<SolicitationList />} />
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth allowedRoles={[1000, 2000, 3000]}/>}>
+            <Route path='/' element={<Layout />} >
+              <Route path='/' element={<Navigate to="home"/>} />
+              <Route path="home" element={<Home />} />
+              <Route path="service" element={<Service />} />
+              <Route path="service/:id" element={<EditService />} />
+              <Route path="solicitation" element={<SolicitationList />} />
 
-            {/* Rotas privadas - usuário comum */}
-            <Route element={<RequireAuth allowedRoles={[2000, 3000]}/>}>
-              <Route path="vehicle" element={<Vehicle />} />
-              <Route path="vehicle/:id" element={<EditVehicle />} />
-              <Route path="person" element={<Person />} />
-              <Route path="service/new" element={<CreateRoute />} />
-            </Route>
+              {/* Rotas privadas - usuário comum */}
+              <Route element={<RequireAuth allowedRoles={[2000, 3000]}/>}>
+                <Route path="vehicle" element={<Vehicle />} />
+                <Route path="vehicle/:id" element={<EditVehicle />} />
+                <Route path="person" element={<Person />} />
+                <Route path="service/new" element={<CreateRoute />} />
+              </Route>
 
-            {/* Rotas privadas - usuário administrador */}
-            <Route element={<RequireAuth allowedRoles={[3000]}/>}>
-              <Route path="person/:id" element={<EditPerson />} />
-            </Route>
-            
-            {/* Rotas privadas - cliente */}
-            <Route element={<RequireAuth allowedRoles={[1000]}/>}>
-              <Route path="new-service" element={<AddSolicitation />} />
-            </Route>
+              {/* Rotas privadas - usuário administrador */}
+              <Route element={<RequireAuth allowedRoles={[3000]}/>}>
+                <Route path="person/:id" element={<EditPerson />} />
+              </Route>
+              
+              {/* Rotas privadas - cliente */}
+              <Route element={<RequireAuth allowedRoles={[1000]}/>}>
+                <Route path="new-service" element={<AddSolicitation />} />
+              </Route>
 
+            </Route>
           </Route>
         </Route>
       </Routes>
