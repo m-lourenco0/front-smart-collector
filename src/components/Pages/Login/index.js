@@ -30,16 +30,24 @@ const Login = () => {
     
 
     const handleSubmit = async (e) => {
+        debugger
         e.preventDefault();
 
         try {
+            
             const res = await axios.post(LOGIN_URL, 
                 JSON.stringify({user, pass}),
                 );
+
             const token = res.data.token;
             const parsed_token = parseJWT(token);
             const logged_user = parsed_token?.sub
+
+            const refresh_token = res.data.refresh_token;
+            localStorage.setItem('refresh_token', refresh_token);
+            
             const roles = res?.data?.permissions;
+            
             setAuth({ user, pass, roles, logged_user, token });
             setUser('');
             setPass('');

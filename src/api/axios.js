@@ -6,7 +6,7 @@ export default axios.create({
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://smart-collector.herokuapp.com',
+        'Access-Control-Allow-Origin': BASE_URL,
     }
 });
 
@@ -14,7 +14,7 @@ export const axiosPrivate = axios.create({
     baseURL: BASE_URL,
     headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://smart-collector.herokuapp.com',
+        'Access-Control-Allow-Origin': BASE_URL,
     },
     withCredentials: true
 });
