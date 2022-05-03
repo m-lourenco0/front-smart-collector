@@ -6,6 +6,7 @@ const useLogout = () => {
 
     const logout = async () => {
         setAuth({});
+        localStorage.setItem('refresh_token', null);
         await axios.post("/login/logout", {
             withCredentials: true
         }).catch(err => {
