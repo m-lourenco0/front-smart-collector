@@ -64,7 +64,6 @@ const EditService = () => {
     }
     
     async function calculateRoute() {
-        debugger
         const waypoint = service?.ds_Waypoints.split('|');
         const waypoints = waypoint.map (waypoint => {
             return {
