@@ -28,9 +28,7 @@ const Login = () => {
     }, [user, pass]);
 
     
-
     const handleSubmit = async (e) => {
-        debugger
         e.preventDefault();
 
         try {
@@ -45,7 +43,7 @@ const Login = () => {
 
             const refresh_token = res.data.refresh_token;
             localStorage.setItem('refresh_token', refresh_token);
-            
+
             const roles = res?.data?.permissions;
             
             setAuth({ user, pass, roles, logged_user, token });
