@@ -74,6 +74,16 @@ const EditPerson = () => {
                             </ul>
                             <ul>
                                 <li className='half'>
+                                    <label>Cidade: </label>
+                                    <input type='text' name='cidade' placeholder='Cidade' {...register('cidade', { required: true })}/>
+                                    {errors.cidade && <span className='error'>* Valor de cidade é inválido</span>}
+                                </li>
+                                <li className='half'>
+                                    <label>Estado: </label>
+                                    <input type='text' name='estado' placeholder='Estado' {...register('estado', { required: true })}/>
+                                    {errors.estado && <span className='error'>* Valor de estado é inválido</span>}
+                                </li>
+                                <li className='half'>
                                     <label>Número: </label>
                                     <input defaultValue={person.nr_Endereco} type='number' name='numero' placeholder='Número' {...register('numero')}/>
                                     {errors.numero && <span className='error'>* Valor de número é inválido</span>}

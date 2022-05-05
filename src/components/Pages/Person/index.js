@@ -61,7 +61,7 @@ const Person = () => {
                                 </li>
                             </ul>
                             <ul>
-                            <li className='half'>
+                                <li className='half'>
                                     <label>Cidade: </label>
                                     <input type='text' name='cidade' placeholder='Cidade' {...register('cidade', { required: true })}/>
                                     {errors.cidade && <span className='error'>* Valor de cidade é inválido</span>}
