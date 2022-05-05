@@ -29,6 +29,8 @@ const EditPerson = () => {
             nome: data.nome.length > 0  ? data.nome : person.ds_Pessoa,
             endereco: data.endereco.length > 0  ? data.endereco : person.ds_Endereco,
             bairro: data.bairro.length > 0 ? data.bairro : person.ds_Bairro,
+            cidade: data.cidade.length > 0 ? data.cidade : person.ds_Cidade,
+            estado: data.estado.length > 0 ? data.estado : person.ds_Estado,
             numero: data.numero.length > 0  ? data.numero : person.nr_Endereco,
             login: data.login.length > 0  ? data.login : person.ds_Login,
             senha: data.senha.length > 0  ? data.senha : person.ds_Senha,
