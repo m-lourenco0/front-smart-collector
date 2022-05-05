@@ -124,21 +124,23 @@ const EditService = () => {
                         <input type='submit' className='service-button' value='Salvar'/>
                     </form>}
                         <button className='service-button' onClick={handleVoltar}>Voltar</button>
-                        <div className='map-container'>
-                            <button className='service-button-map' onClick={calculateRoute}>Mostrar Rota</button>
-                            <GoogleMap 
-                                center={center} 
-                                zoom={15}
-                                mapContainerClassName='map-render'
-                                options={{
-                                    mapTypeControl: false,
-                                }}
-                            >
-                                {directions && (
-                                    <DirectionsRenderer directions={directions} />
-                                )}
-                            </GoogleMap>
-                        </div>
+                        {IsAuthorized([2000, 3000]) &&
+                            <div className='map-container'>
+                                <button className='service-button-map' onClick={calculateRoute}>Mostrar Rota</button>
+                                <GoogleMap 
+                                    center={center} 
+                                    zoom={15}
+                                    mapContainerClassName='map-render'
+                                    options={{
+                                        mapTypeControl: false,
+                                    }}
+                                >
+                                    {directions && (
+                                        <DirectionsRenderer directions={directions} />
+                                    )}
+                                </GoogleMap>
+                            </div>
+                        }
                     </div>
                 </div>
                 
