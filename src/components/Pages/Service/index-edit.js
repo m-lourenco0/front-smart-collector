@@ -6,6 +6,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import IsAuthorized from '../../IsAuthorized';
 import { GoogleMap, useJsApiLoader, DirectionsRenderer } from '@react-google-maps/api';
 
+const { REACT_APP_GOOGLE_MAPS_API_KEY } = process.env;
+
 const EditService = () => {
     
     let { id } = useParams();
@@ -31,7 +33,7 @@ const EditService = () => {
     }, [id]);
 
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: 'AIzaSyD175PxUd2mGLbrGd6YYwP35je2hHIuuLI',
+        googleMapsApiKey: REACT_APP_GOOGLE_MAPS_API_KEY,
     });
 
     if (!isLoaded) {
