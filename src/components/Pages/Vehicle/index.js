@@ -23,7 +23,7 @@ const Vehicle = () => {
       }, []);
 
     const onSubmit = async (data) => {
-        await axiosPrivate.post('/vehicle/add/', data)
+        await axiosPrivate.post('/vehicle/add', data)
         getVehicles();
         reset();
     }
